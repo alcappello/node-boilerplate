@@ -1,5 +1,5 @@
 {
-  "name": "node_boilerplate",
+  "name": "node-boilerplate",
   "version": "0.0.1",
   "description": "A simple Node.js boilerplate with mongoDB, mocha and grunt",
   "repository": "",
