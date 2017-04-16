@@ -1,0 +1,50 @@
+version: "2.1"
+
+services:
+    web:
+        build: .
+        container_name: boilerplate_node
+        ports:
+            - 3000:3000
+        environment:
+            - NODE_ENV=development
+        networks:
+            - server
+        volumes:
+            - ./:/app
+        command: npm run dev
+
+    mocha:
+        build: .
+        container_name: boilerplate_test
+        environment:
+            - NODE_ENV=test
+        networks:
+            - server
+        volumes:
+            - .:/app
+        command: npm run test
+
+    mongo:
+        image: mongo:latest
+        container_name: boilerplate_mongo
+        ports:
+            - 27017:27017
+        networks:
+            - server
+        volumes:
+            - /etc/localtime:/etc/localtime:ro
+            - ./data:/data/db
+
+    mongo-express:
+        image: mongo-express:latest
+        container_name: boilerplate_mongo_web
+        ports:
+            - 4000:8081
+        environment:
+            - ME_CONFIG_OPTIONS_EDITORTHEME=ambiance
+        networks:
+            - server
+
+networks:
+    server:
